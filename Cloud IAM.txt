@@ -1,0 +1,21 @@
+
+
+removing acces from User 2
+gcloud projects remove-iam-policy-binding my-project \
+    --member=user2@qwiklabs-gcp-03-7e1e1edae3e3 --role=project viewer
+
+
+gcloud projects add-iam-policy-binding my-project \
+    --member=user:my-user@example.com --role=roles/viewer
+
+
+Compute engine serice account
+
+gcloud beta compute 
+--project=qwiklabs-gcp-03-7e1e1edae3e3 instances create demoiam 
+--zone=us-central1-c --machine-type=f1-micro --subnet=default 
+--network-tier=PREMIUM --maintenance-policy=MIGRATE 
+--service-account=read-bucket-objects@qwiklabs-gcp-03-7e1e1edae3e3.iam.gserviceaccount.com 
+--scopes=https://www.googleapis.com/auth/cloud-platform --image=debian-9-stretch-v20200902 
+--image-project=debian-cloud --boot-disk-size=10GB --boot-disk-type=pd-standard 
+--boot-disk-device-name=demoiam --reservation-affinity=any
